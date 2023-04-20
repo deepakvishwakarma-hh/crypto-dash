@@ -44,9 +44,8 @@ const Aside: React.FC<props> = ({ data, asMenu }) => {
             <div className='comp-wrapper'>
                 {(filteredItems as coin[]).map((coin: any) => {
                     const isSelected = selected.filter((c) => c.id === coin.id).length === 1
-                    return <AsideBlock selected={isSelected} data={coin} />
+                    return <AsideBlock key={coin.name} selected={isSelected} data={coin} />
                 })}
-
 
                 {(filteredItems as coin[]).length === 0 && <div className='data-not-found'>no data found</div>}
             </div>

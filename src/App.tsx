@@ -6,9 +6,10 @@ import { HiOutlineMenuAlt3 } from 'react-icons/hi'
 // import Menu from './components/Menu';
 import { toggleMenu } from './store/slices/coins';
 import { useAppSelector, useAppDispatch } from './store/hook';
+import { error } from 'console';
 
 function App() {
-  const { isLoading, data } = useQuery('repoData', () =>
+  const { isLoading, data, error } = useQuery('repoData', () =>
     fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest', {
       headers: {
         'X-CMC_PRO_API_KEY': '53a1f79b-05c2-48ee-8f51-202e2e79aa2e'
@@ -28,14 +29,21 @@ function App() {
   if (isLoading) return <div>
     'Loading...'
   </div>
+
+  if (error) {
+    return <div>
+      {JSON.stringify(error)}
+    </div>
+  }
+
   return (
     <>
 
-      {menuToggled && <Aside asMenu data={data.data} />}
+      {menuToggled && <Aside asMenu data={data?.data} />}
 
       <div className='wrapper'>
 
-        <Aside data={data.data} />
+        <Aside data={data?.data} />
 
         <div className='main'>
           <header>
@@ -52,7 +60,7 @@ function App() {
           <main>
 
             {selected.map((coin: any) => {
-              return <CryptoBlock {...{
+              return <CryptoBlock key={coin.name} {...{
                 buy: parseFloat(coin.quote.USD.price).toFixed(2).toString(),
                 sell: parseFloat(coin.quote.USD.price).toFixed(2).toString(),
                 price: parseFloat(coin.quote.USD.price).toFixed(2).toString(),
