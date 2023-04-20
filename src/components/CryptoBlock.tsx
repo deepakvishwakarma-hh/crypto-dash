@@ -13,13 +13,13 @@ interface props2 {
 const CryptoBlock: React.FC<props2> = ({ name, symbol, price, change, buy, sell }) => {
     const isNegative = parseFloat(change) < 0;
     const conditionalClasses = `${!isNegative ? 'text-green' : 'text-red'}`
+    const imageUrl = `/icons/${symbol.toLowerCase()}.png`
     const Icon = isNegative ? RiArrowDownSFill : RiArrowUpSFill
     return (
         <div className='currency-lg'>
-
             <div className='left'>
                 <div>
-                    <img src={`https://cryptoicons.org/api/icon/${symbol.toLowerCase()}/200`} alt="icon" />
+                    <img src={imageUrl} alt="icon" />
                 </div>
             </div>
 

@@ -3,10 +3,8 @@ import { useQuery } from 'react-query';
 import CryptoBlock from './components/CryptoBlock';
 import Aside from './components/Aside';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi'
-// import Menu from './components/Menu';
 import { toggleMenu } from './store/slices/coins';
 import { useAppSelector, useAppDispatch } from './store/hook';
-import { error } from 'console';
 
 function App() {
   const { isLoading, data, error } = useQuery('repoData', () =>
@@ -43,7 +41,7 @@ function App() {
 
       <div className='wrapper'>
 
-        <Aside data={data?.data} />
+        <Aside data={data?.data.slice(0, 10)} />
 
         <div className='main'>
           <header>
@@ -54,8 +52,6 @@ function App() {
             <button onClick={handleToggle} className='hamburger-btn'><HiOutlineMenuAlt3 size={28} color='gray' /></button>
 
           </header>
-
-
 
           <main>
 

@@ -9,7 +9,7 @@ interface props {
 
 const AsideBlock: React.FC<props> = ({ data, selected }) => {
     const dispatcher = useAppDispatch()
-    const imageUrl = `https://cryptoicons.org/api/icon/${data.symbol.toLowerCase()}/200`
+    const imageUrl = `/icons/${data.symbol.toLowerCase()}.png`
 
     const handleClick = () => {
         dispatcher(add(data))
